@@ -1,0 +1,24 @@
+{
+    "id": 1162949476,
+    "nickname": "TESTGQSRGOA2",
+    "password": "qatest363",
+    "site_status": "active",
+    "site_id": "MLA",
+    "description": "a description",
+    "date_created": "2022-07-18T14:25:08-04:00",
+    "date_last_updated": "2022-07-18T14:25:08-04:00",
+    "access_token": "TEST-6363923794821253-071815-e624f8db5bf7865bc636a53020aacbbd-1162949476"
+}
+
+{
+    "id": 1162947798,
+    "nickname": "TESTWFNTJZTK",
+    "password": "qatest6693",
+    "site_status": "active",
+    "site_id": "MLA",
+    "description": "a description",
+    "date_created": "2022-07-18T14:27:16-04:00",
+    "date_last_updated": "2022-07-18T14:27:16-04:00"
+    "e_mail" : "test_user_63234944@testuser.com"
+}
+
