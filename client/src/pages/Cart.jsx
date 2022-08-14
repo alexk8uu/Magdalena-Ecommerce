@@ -7,7 +7,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { mobil } from "../responsibe.js";
 import { useDispatch, useSelector } from "react-redux";
 import { mercadopagoRequest } from "../requestMethods.js";
-import { addCheckout, removeProduct, addQuantity, removeQuantity} from "../redux/cartRedux";
+import { addCheckout, addQuantity, removeQuantity} from "../redux/cartRedux";
 
 
 
@@ -159,14 +159,6 @@ const SummaryItem = styled.div`
   font-size: ${(props) => props.type === "total" && "24px"};
 `;
 
-const RemoveProduct = styled.div`
-  padding: 25px;
-  font-size: 20px;
-  font-weight: bold;
-  color: crimson;
-  cursor: pointer;
-`;
-
 const SummaryItemText = styled.span``;
 
 const SummaryItemPrice = styled.span``;
@@ -202,10 +194,6 @@ const Cart = () => {
     window.location.replace(req.data.init_point);
   };
 
-  const handleRemoveProduct = (product) => {
-    dispatch(removeProduct(product));
-  }
-
   const handleAddQuantity = (product) => {
     dispatch(addQuantity(product))
   } 
@@ -213,7 +201,7 @@ const Cart = () => {
     dispatch(removeQuantity(product))
   } 
 
-  console.log("USER", user);
+  /* console.log("USER", user); */
 
   return (
     <Container>
@@ -258,7 +246,6 @@ const Cart = () => {
                     $ {product.price * product.quantity}
                   </ProductPrice>
                 </PriceDetail>
-                <RemoveProduct onClick={() => handleRemoveProduct(product)}>X</RemoveProduct>
               </Product>
             ))}
             <Hr />

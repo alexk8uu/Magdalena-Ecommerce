@@ -45,7 +45,7 @@ const Success = () => {
       .map((p) => p.split("="))
   );
 
-  console.log("ESTO ES LOCATION", responseMp.preference_id);
+/*   console.log("ESTO ES LOCATION", responseMp.preference_id); */
   const checkout = useSelector((state) => state.cart.checkoutProducts)[0];
   const [orderId, setOrderId] = useState(null);
 

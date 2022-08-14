@@ -74,17 +74,20 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-
 //GET PAYMENTID ORDER
 
-router.get("/findOrder/:paymentId", verifyTokenAndAuthorization, async (req, res) => {
-  try {
-    const order = await Order.findOne({ paymentId: req.params.paymentId });
-    res.status(200).json(order);
-  } catch (error) {
-    res.status(500).json(error);
+router.get(
+  "/findOrder/:paymentId",
+  verifyToken,
+  async (req, res) => {
+    try {
+      const order = await Order.findOne({ paymentId: req.params.paymentId });
+      res.status(200).json(order);
+    } catch (error) {
+      res.status(500).json(error);
+    }
   }
-});
+);
 
 // GET ALL ORDERS
 
@@ -100,13 +103,21 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 // GET MONTHY INCOME
 
 router.get("/income", verifyTokenAndAdmin, async (req, res) => {
+  const productId = req.query.p_id;
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
 
   try {
     const income = await Order.aggregate([
-      { $match: { createdAt: { $gte: previousMonth } } },
+      {
+        $match: {
+          createdAt: { $gte: previousMonth },
+          ...(productId && {
+            products: { $elemMatch: { productId } },
+          }),
+        },
+      },
       {
         $project: {
           month: { $month: "$createdAt" },

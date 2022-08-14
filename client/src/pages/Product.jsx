@@ -160,7 +160,7 @@ const Product = () => {
                 setProduct(res.data)
                 setColor(res.data.color[0])
                 setSize(res.data.size[0])
-                console.log("Esto es res", res.data)
+              /*   console.log("Esto es res", res.data) */
             } catch (error) {
                 console.log(error)
             }
