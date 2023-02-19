@@ -10,20 +10,20 @@ import { logout } from "../redux/userRedux.js";
 
 const Container = styled.div`
   height: 80px;
-  ${mobil({ height: "60px" })}
+  ${mobil({ height: "75px" })}
 `;
 const Wrapper = styled.div`
   padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobil({ padding: "10px 0px" })}
+  ${mobil({ padding: "10px 0px", height:'5vh'})}
 `;
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+
 `;
 
 const SearchContainer = styled.div`
@@ -42,7 +42,8 @@ const Input = styled.input`
 
 const Center = styled.div`
   flex: 1;
-  margin-bottom: 25px;
+  ${mobil({flex: 2, justifyContent: 'flex-end' })}
+
 `;
 
 const Logo = styled.div`
@@ -60,9 +61,9 @@ const Right = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 25px;
-  ${mobil({ justifyContent: "center", flex: 2 })}
+  justify-content: '';
+
+  ${mobil({flex: 2, justifyContent: 'space-around' })}
 `;
 
 const MenuItem = styled.div`
@@ -75,6 +76,7 @@ const MenuItem = styled.div`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  color: black;
 
   &:focus,
   &:hover,
@@ -113,16 +115,16 @@ const Navbar = () => {
             <MenuItem onClick={handleLogout}>SALIR</MenuItem>
           ) : (
             <>
-            <StyledLink to='/login'>
-              <MenuItem>INGRESAR</MenuItem>
-            </StyledLink>
-            <StyledLink to='/register'>
-              <MenuItem>REGISTRARSE</MenuItem>
-            </StyledLink>
+              <StyledLink to="/login">
+                <MenuItem>INGRESAR</MenuItem>
+              </StyledLink>
+              <StyledLink to="/register">
+                <MenuItem>REGISTRARSE</MenuItem>
+              </StyledLink>
             </>
           )}
           <StyledLink to="/cart">
-            <MenuItem>
+            <MenuItem style={{marginRight: '15px'}}>
               <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlinedIcon color="action" />
               </Badge>

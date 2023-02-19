@@ -18,14 +18,14 @@ import img14 from '../utils/8.jpg'
 export const sliderItems = [    
     {
         id: 1,
-        img: img1,
+        img: img2,
         title: "TEMPORADA INVIERNO",
         desc: "LA ROPA QUE VOS QUERIAS! AHORA 50% OFF",
         bg:"fcffe2",
     },
     {
         id: 2,
-        img: img2,
+        img: img1,
         title: "TEMPORADA VERANO",
         desc: "LA ROPA QUE VOS QUERIAS! AHORA 50% OFF",
         bg:"fcf1d3",

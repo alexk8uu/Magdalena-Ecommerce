@@ -3,7 +3,10 @@ import { mobil } from "../responsibe";
 import img from "../utils/imagencreateaccount.jpg";
 import { useForm } from "react-hook-form";
 import { registerUser } from "../redux/apiCalls";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { reset } from "../redux/userRedux";
 
 const Container = styled.div`
   width: 100vw;
@@ -22,17 +25,20 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
+
   background-color: white;
-  ${mobil({ width: "75%", height: "85vh" })}
+  ${mobil({ width: "75%", height: "auto" })}
 `;
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 300;
+  text-align: center;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
+  ${mobil({ width: "100%" })}
 `;
 
 const Input = styled.input`
@@ -40,7 +46,7 @@ const Input = styled.input`
   min-width: 40%;
   margin: 20px 10px 0px 0px;
   padding: 10px;
-  ${mobil({ margin: "10px 10px 0px 0px" })}
+  ${mobil({ margin: "10px 10px 0px 0px", width: "100%" })}
 `;
 const Agreement = styled.span`
   font-size: 12px;
@@ -64,6 +70,19 @@ const InputContainer = styled.div`
   color: crimson;
 `;
 
+const TextErrorRegister = styled.h4`
+  margin-top: 10px;
+  font-size: 14px;
+  color: crimson;
+`;
+
+const TextSuccessRegister = styled.h2`
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: green;
+`;
+
 const Register = () => {
   const {
     register,
@@ -73,17 +92,30 @@ const Register = () => {
   } = useForm();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { errorText, error, registerData } = useSelector((state) => state.user);
+
+  console.log("Estos es RegisterData:", registerData);
 
   const validatePass = () => {
-    return watch('password') === watch('confirmPassword')
+    return watch("password") === watch("confirmPassword");
   };
 
-
-
   const onSubmit = (data) => {
-    registerUser(data);
-    navigate('/login');
-  }
+    registerUser(data, dispatch, navigate);
+  };
+
+  useEffect(() => {
+    const handlePageLoad = () => {
+      dispatch(reset());
+    };
+    window.addEventListener("load", handlePageLoad);
+
+    return () => {
+      window.removeEventListener("load", handlePageLoad);
+      dispatch(reset());
+    };
+  }, [dispatch]);
 
   return (
     <Container>
@@ -148,8 +180,12 @@ const Register = () => {
                 validate: validatePass,
               })}
             />
-            {errors.confirmPassword?.type === 'required' && <b>Ingrese la contraseña nuevamente</b>}
-            {errors.confirmPassword?.type === 'validate' && <b>Las contraseñas no coincidir</b>}
+            {errors.confirmPassword?.type === "required" && (
+              <b>Ingrese la contraseña nuevamente</b>
+            )}
+            {errors.confirmPassword?.type === "validate" && (
+              <b>Las contraseñas no coincidir</b>
+            )}
           </InputContainer>
           <Agreement>
             By creatin an account to the processing of my personal data in
@@ -157,6 +193,10 @@ const Register = () => {
           </Agreement>
           <Button type="submit">CREAR</Button>
         </Form>
+        {registerData?.success && (
+          <TextSuccessRegister>{registerData.msg}</TextSuccessRegister>
+        )}
+        {error && <TextErrorRegister>{errorText?.msg}</TextErrorRegister>}
       </Wrapper>
     </Container>
   );

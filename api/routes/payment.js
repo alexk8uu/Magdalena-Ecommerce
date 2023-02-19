@@ -38,8 +38,8 @@ router.post("/mercadopago", verifyToken, async (req, res) => {
       auto_return: "all",
       back_urls: {
         success: "http://localhost:3000/success",
-        pending: "http://localhost:3001/pending",
-        failure: "http://localhost:3001/failed",
+        pending: "http://localhost:3000/pending",
+        failure: "http://localhost:3000/failed",
       },
     };
     let answer = await mercadopago.preferences.create(preference);

@@ -92,6 +92,7 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  ${mobil({ fontSize: '11px'})}
 `;
 
 const ProductName = styled.span``;
